@@ -1,0 +1,14 @@
+ constant padrao_de_teste: padroes := (
+            (t =>   4,  load=>'1', init=>x"20", j1=>'0', j2 =>'0'),   -- partida de 20 minutos
+            (t =>  10,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 começa a partida 10 ciclos depois
+            (t => 60,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 joga por 60 ciclos (1 min) restante:19min
+            (t => 120,  load=>'0', init=>x"00", j1=>'0', j2 =>'1'),   -- jogador 2 joga por 120 ciclos (2 min) restante:18min
+            (t => 300,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 joga por 300 ciclos (5 min) restante: 14min
+            (t => 360,  load=>'0', init=>x"00", j1=>'0', j2 =>'1'),   -- jogador 2 joga por 360 ciclos (6 min) restante: 12min
+            (t => 180,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 joga por 180 ciclos (3 min) restante: 11min
+            (t => 60,  load=>'0', init=>x"00", j1=>'0', j2 =>'1'),   -- jogador 2 joga por 60 ciclos (1 min)  restante: 11min
+		(t => 240 ,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 joga por 240 ciclos (4 min) restante: 7min
+            (t => 420,  load=>'0', init=>x"00", j1=>'0', j2 =>'1'),   -- jogador 2 joga por 420 ciclos (7 min)  restante: 4min  
+		(t => 300 ,  load=>'0', init=>x"00", j1=>'1', j2 =>'0'),   -- jogador 1 joga por 300 ciclos ( 5 min) restante: 2 min
+            (t => 180 ,  load=>'0', init=>x"00", j1=>'0', j2 =>'1'),   -- jogador 2 joga por  ciclos ( 180 min)  restante: 1 min 
+            (t => 10000,  load=>'0', init=>x"00", j1=>'0', j2 =>'0') );  -- ultimo comando – coloca todos os valores em zero
