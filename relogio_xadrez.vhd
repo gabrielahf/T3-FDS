@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- RELOGIO DE XADREZ
 -- Author - Fernando Moraes - 25/out/2023
--- Revision - Iaçanã Ianiski Weber - 30/out/2023
+-- Revision - IaÃ§anÃ£ Ianiski Weber - 30/out/2023
 --------------------------------------------------------------------------------
 library IEEE;
 library ieee;
@@ -12,18 +12,20 @@ library work;
 entity relogio_xadrez is
     port( j1,j2,load,clock,reset: in std_logic;
           init_time: in std_logic_vector (7 downto 0);
-          winJ1,winJ2: out std_logic;
-          contj1,contj2: out std_logic_vector (15 downto 0)
+          winJ1,winJ2: out std_logic
+	  --contj1,contj2: out std_logic_vector (15 downto 0)
+	);
+          
 
         -- COMPLETAR DE ACORDO COM A ESPECIFICACAO
-    );
+    
 end relogio_xadrez;
 
 architecture relogio_xadrez of relogio_xadrez is
     -- DECLARACAO DOS ESTADOS
-    type states is ( INICIO, TIME0, START, j1, j2, VIT1, VIT2);
+    type states is ( INICIO, TIME0, START,j1 ,j2, VIT1, VIT2);
     signal EA, PE : states;
-    signal J1, J2, load_interno: std_logic;
+    signal J1, J2, load_interno, en1, en2: std_logic;
     signal contj1,contj2 : std_logic_vector (15 downto 0);
     -- ADICIONE AQUI OS SINAIS INTERNOS NECESSARIOS
     
@@ -68,7 +70,7 @@ begin
                 PE <= j2;
             elsif J1 = '0' then
                 PE <= j1;
-            elsif contj1 = '0' then
+            elsif contj1 = '000000000000000' then
                 PE <= VIT2;
             end if;
         when j2 =>
@@ -76,7 +78,7 @@ begin
                 PE <= j1;
             elsif J2 = '0' then
                 PE <= j2;
-            elsif contj2 = '0' then
+            elsif contj2 = '000000000000000' then
                 PE <= VIT1;
             end if;
         when VIT1 =>
@@ -94,5 +96,4 @@ end process;
     load_interno <= '1' when EA = TIME0 else '0';
 
 end relogio_xadrez;
-
 
