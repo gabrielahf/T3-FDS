@@ -7,6 +7,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 library work;
 
+
 entity dec_counter is
     port( clock, reset, load, en : in std_logic;
           first_value : in  std_logic_vector(3 downto 0);
