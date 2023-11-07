@@ -94,8 +94,9 @@ end process;
     j1 <= '1' when EA = en1 else '0';
     j2 <= '1' when EA = en2 else '0';
     load_interno <= '1' when EA = TIME0 else '0';
-    contj1 <= '1' when EA = cont1 else '0';
-    contj2 <= '1' when EA = cont2 else '0';
+    contj1 <= cont1 when EA = j1 else "0000000000000000"; 
+    contj2 <= cont2 when EA = j2 else "0000000000000000";
+
 
 end relogio_xadrez;
 
