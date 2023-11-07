@@ -23,14 +23,15 @@ architecture relogio_xadrez of relogio_xadrez is
     -- DECLARACAO DOS ESTADOS
     type states is ( INICIO, TIME0, START, j1, j2, VIT1, VIT2);
     signal EA, PE : states;
-    signal J1, J2, contj1,contj2 : std_logic;
+    signal J1, J2, load_interno: std_logic;
+    signal contj1,contj2 : std_logic_vector (15 downto 0);
     -- ADICIONE AQUI OS SINAIS INTERNOS NECESSARIOS
     
 begin
 
     -- INSTANCIACAO DOS CONTADORES
-    contador1 : entity work.temporizador port map ( clock => clock, reset => reset, load => load, en => j1, init_time => TIME0, cont => contj1);
-    contador2 : entity work.temporizador port map ( clock => clock, reset => reset, load => load, en => j2, init_time => TIME0, cont => contj2);
+    contador1 : entity work.temporizador port map ( clock => clock, reset => reset, load => load_interno, en => en1, init_time => init_time, cont => contj1);
+    contador2 : entity work.temporizador port map ( clock => clock, reset => reset, load => load_interno, en => en2, init_time => init_time, cont => contj2);
 
     -- PROCESSO DE TROCA DE ESTADOS
     process (clock, reset)
@@ -86,8 +87,11 @@ begin
 end process;
 
     -- ATRIBUICAO COMBINACIONAL DOS SINAIS INTERNOS E SAIDAS - Dica: faca uma maquina de Moore, desta forma os sinais dependem apenas do estado atual!!
-    winJ1 <= '1' when PE = VIT1 else '0';
-    winJ2 <= '1' when PE = VIT2 else '0';
+    winJ1 <= '1' when EA = VIT1 else '0';
+    winJ2 <= '1' when EA = VIT2 else '0';
+    j1 <= '1' when EA = en1 else '0';
+    j2 <= '1' when EA = en2 else '0';
+    load_interno <= '1' when EA = TIME0 else '0';
 
 end relogio_xadrez;
 
